@@ -1,0 +1,17 @@
+<html>
+<header>
+	<title>Список команд</title>
+</header>
+<body>
+	{% if teams %}
+		Участвует {{ teams|length }} команд
+		<ul>
+		{% for team in teams %}
+			<li>{{team.username}} | {{team.points}} | {{team.last_task_time}}</li>
+		{% endfor %}
+		<ul>
+	{% else %}
+		<p>Список команд пуст</p>
+	{% endif %}
+</body>
+<html>
