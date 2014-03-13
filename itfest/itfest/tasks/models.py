@@ -5,8 +5,8 @@ from django.contrib.auth.hashers import make_password
 # Create your models here.
 
 CATEGORY_CHOICES = (
-	('Crypto', 'Криптография'),
-	('Stegastic', 'Стеганография'),
+	('Crypto', 'Crypto'),
+	('Stegastic', 'Stegano'),
 	('PNC', 'Professional Noob coding'),
 	('Joy', 'JOY'),
 )
@@ -25,10 +25,10 @@ class Task(models.Model):
 	category = models.CharField(max_length = 15, choices = CATEGORY_CHOICES)
 	points = models.PositiveSmallIntegerField(choices = POINTS_CHOICES)
 	displaytime = models.DateTimeField()
-	active = models.BooleanField()
+	active = models.BooleanField(default = False)
 	answer = models.CharField('answer', max_length = 100)
-	hint = models.CharField(max_length = 200)
-	hint_display_time = models.DateTimeField(blank = True)
+	hint = models.CharField(max_length = 200, blank = True)
+	hint_display_time = models.DateTimeField(blank = True, null = True)
 	
 	def __unicode__(self):
 		return u'%s %i' %(self.category, self.points)

@@ -10,6 +10,7 @@ class TaskTable(models.Model):
 
 	def __unicode__(self):
 		return u'%s %s %i' % (self.team.username, self.task.category, self.task.points)
+	
 	class Meta:
 		ordering = ['task_time']
 	
