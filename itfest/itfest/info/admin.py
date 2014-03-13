@@ -4,8 +4,8 @@ from itfest.info.models import News, Chat
 
 
 class NewsAdmin(admin.ModelAdmin):
-	list_display = ('time')
-	search_fields = ('time')	
+	list_display = ('time',)
+	search_fields = ('time',)	
 
 class ChatAdmin():
 	list_display = ('team', 'text', 'time')

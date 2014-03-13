@@ -7,4 +7,4 @@ class TaskAdmin(admin.ModelAdmin):
 	search_fields = ('category', 'points')
 	
 	
-admin.site.register(Task)
+admin.site.register(Task, TaskAdmin)

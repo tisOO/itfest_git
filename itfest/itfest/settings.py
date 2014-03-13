@@ -36,7 +36,7 @@ TEMPLATE_CONTEXT_PROCCESSORS = (
 )
 
 TEMPLATE_DIRS = (
-	'D:/works/python_projects/dj_projects/itfest/templates',
+	'D:/works/python_projects/dj_projects/itfest_git/itfest/templates',
 )
 # Application definition
 

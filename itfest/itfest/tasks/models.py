@@ -45,6 +45,8 @@ class Task(models.Model):
 		
 	def set_answer(self, raw_answer):
 		self.answer = make_password(raw_answer)
+                                  
+		
 	class Meta:
 		ordering = ['category']
 		
