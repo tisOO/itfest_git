@@ -1,0 +1,42 @@
+﻿{% extends "base_itfest.html" %}
+
+
+{% block title %} Задания {% endblock %}
+
+{% block text_info %}
+	{% if user.is_authenticated %}
+	<div id="sideleft">
+		<h3>Этапы заданий</h3>
+		<ul>
+			{%if active_tasks%}
+				{%for active_task in active_tasks%}
+					<li><a href="{{ request.get_host }}/task/{{active_task.id}}">Задание {{forloop.counter}}</a></li>
+				{%endfor%}
+			{%else%}
+				<p>Задания еще не опубликованы. Наберитесь терпения</p>
+			{%endif%}
+		</ul>
+	</div>
+	{% endif %}
+	<div id="content" {% if not user.is_authenticated %}class = "main" {% endif %}> 
+		{%if user.is_authenticated%}
+			{%if cur_task.active%}
+				<h2>{{cur_task.header}}</h2>
+				<p>{{cur_task.text}}</p>
+				{%if is_show_answer%}
+					<form id="set_answer" action="" method="post">
+						{% csrf_token %}
+						<input type="text" name="answer" value="" placeholder="Введите ответ" />
+						<input type="submit" name="enter" value="Попытаться ответить" />
+					</form>
+				{%endif%}
+			{%else%}
+				<h2>Задание недоступно</h2>
+				<p>Наберитесь терпения, насладитесь чашечкой горячего кофе, посмотрите в окно, подумайте о жизни. Задумайтесь о её смысле, да и есть ли он. А задание уже скоро будет опубликовано;)</p>
+			{%endif%}
+		{%else%}
+			<h2>Вы неавторизированы. Блок заданий недоступен</h2>
+		{%endif%}
+		
+	</div>
+	{% endblock %}

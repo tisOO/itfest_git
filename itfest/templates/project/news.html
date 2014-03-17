@@ -1,0 +1,18 @@
+{% extends "base_itfest.html" %}
+
+{% block title %}Новости{% endblock %}
+
+{% block text_info %}
+<div id="content" class = "main" > 
+	{% if news %}
+		{% for one_news in news %}
+			<h2>{{one_news.header}}</h2>
+			<p>{{one_news.time}}</p>
+			<p>{{one_news.text}}</p>
+		{% endfor %}
+	{% else %}
+		<h2>Новостей нет</h2>
+	{%endif%}
+</div>
+{% endblock %}
+{% block show_news %}{%endblock%}

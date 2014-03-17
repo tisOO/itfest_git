@@ -1,0 +1,10 @@
+{% extends "base_itfest.html" %}
+
+{% block title %}Главная страница{% endblock %}
+
+{% block text_info %}
+<div id="content" class = "main" > 
+	<h2>Главная страница</h2>
+	{{ final_time.time|date:"N d Y G:i" }}
+</div>
+{% endblock %}

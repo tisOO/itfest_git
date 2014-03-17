@@ -1,0 +1,95 @@
+<html>
+<head>
+	<title>{%block title%}Олимпиада{%endblock%}</title>
+	{% load static %}
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/style.css">
+    <!--<link rel="stylesheet" href="{{ STATIC_URL }}js/highslide/highslide.css" media="screen, projection" />-->
+	{% load static %}
+	<script type="text/javascript" src="{{ STATIC_URL }}js/jquery.js"></script>
+    <!--<script src="{{ STATIC_URL }}js/highslide/highslide-full.js"></script>-->
+	{% load static %}
+    <script type="text/javascript" src="{{ STATIC_URL }}js/main.js"></script>
+</head>
+<body>
+<div id="wrap">
+	<div id="header">
+		<div id="logo">
+		</div>
+		<div id="timer">
+			<div id="t_info">
+				До окончания олимпиады осталось
+			</div>
+		
+			<div id="t_time" time="{{ finish_time.time|date:"n d Y G:i" }}">
+				12:25:37
+			</div>
+		</div>
+	</div>
+	<div id="nav">
+		<ul>
+			<li><a href="{{ request.get_host }}/main">Главная</a></li>
+			{% if user.is_authenticated %}<li><a href="{{ request.get_host }}/task/1">Задания</a></li>{% endif %}
+			<li><a href="{{ request.get_host }}/news">Новости</a></li>
+			<li><a href="{{ request.get_host }}/teams">Команды</a></li>
+			<li><a href="{{ request.get_host }}/rules">Положение</a></li>
+			<li><a href="{{ request.get_host }}/contacts">Контакты</a></li>
+		</ul>
+		{% if user.is_authenticated %}<div id="auth_team">Здравствуйте {{user.username}}<a href="{{ request.get_host }}/logout" class="logout"></a></div>{% endif %}
+	</div>
+	
+	{% block text_info %}
+	
+	{% endblock %}
+	<div id="sideright">
+		{% block team_rating %}
+		<div id="rating">
+			<h3>Рейтинг команд</h3>
+			{% if teams %}
+			<div class="team">
+				<span class="team_name">Название</span>
+				<span class="team_date">Время</span>
+				<span class="team_rating">Очки</span>
+				<div class="clear"></div>
+			</div>
+				{% for team in teams %}
+					<div class="team{% if team.id == user.id %} current{% endif %}">
+						<span class="team_name">{{team.username}}</span>
+						{%if team.last_task_time%}<span class="team_date">{{team.last_task_time| date:"H:i:s"}}</span>{%endif%}
+						<span class="team_rating">{{team.points}}</span>
+						<div class="clear"></div>
+					</div>
+			
+				
+				{% endfor %}
+		
+			{% else %}
+				<p>Список команд пуст</p>
+			{% endif %}
+		</div>
+		{% endblock %}
+		{% block show_news %}
+		<div id="news">
+			<h3>Новости</h3>
+			
+			{% if cur_news %}
+				{% for one_news in cur_news %}
+					
+					<div class="news">
+						<span class="date">{{one_news.time}}</span>
+						<p>{{one_news.header}}</p>
+						<p>{{one_news.text}}</p>
+					</div>
+				{% endfor %}
+			{% else %}
+				<p>Новостей нет</p>
+			{% endif %}
+		</div>
+		{% endblock %}
+	</div>
+	<div class="clear"></div>
+	<div id="footer">
+		&copy; 2014. IT Fest. Все права защищены.
+	</div>
+</div>
+</body>
+</html>

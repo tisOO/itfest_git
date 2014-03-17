@@ -1,0 +1,17 @@
+{% extends "base_itfest.html" %}
+
+{% block title %}Список команд{% endblock %}
+
+{% block text_info %}
+<div id="content" class = "main" > 
+	<h2>Рейтинг команд</h2>
+	{% if teams %}
+		{% for one_team in teams %}
+			<p>{{one_team.username}} {{one_team.last_task_time}} {{one_team.points}}</p>
+		{% endfor %}
+	{%else%}
+		<p>Список команд пуст</p>
+	{%endif%}
+</div>
+{% endblock %}
+{% block team_rating %}{% endblock %}
