@@ -5,6 +5,19 @@
 {% block text_info %}
 <div id="content" class = "main" > 
 	<h2>Главная страница</h2>
-	{{ final_time.time|date:"N d Y G:i" }}
+	{% if not user.is_authenticated %}
+	<div id="auth">
+			<button id="getLoginWindow">Начать расследование</button>
+			<div id="loginWindow">
+				<form action="" method="post">
+					{% csrf_token %}
+					<input type="text" name="login" placeholder="Логин" />
+					<input type="password" name="pass" placeholder="Пароль" />
+					<input type="submit" name="submit" value="Войти">
+				</form>
+				<div id="closeLoginWindow">X</div>
+			</div>
+		</div>
+	{% endif %}
 </div>
 {% endblock %}

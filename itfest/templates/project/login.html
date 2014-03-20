@@ -1,0 +1,20 @@
+<html>
+<head>
+	<title>Логин</title>
+</head>
+<body>
+	{% if forms.errors %}
+		<p style ="color:red;">
+			Исправьте следующие ошибки {{forms.errors}}.
+		</p>
+	{% endif %}
+	
+	<form action="" method="post">
+		{% csrf_token %}
+		<table>
+			{{form.as_table}}
+		</table>
+		<input type="submit" value="Войти в систему">
+	</form>
+</body>
+</html>

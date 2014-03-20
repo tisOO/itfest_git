@@ -76,6 +76,12 @@ $(document).ready(function(){
 	$("#load").click(function(){
 		loadmark();
 	});
+	$("#getLoginWindow").click(function(){
+		$("#loginWindow").fadeIn();
+	});
+	$("#closeLoginWindow").click(function(){
+		$("#loginWindow").fadeOut();
+	});
 	startTime();
 });
 $(document).ready(function(){

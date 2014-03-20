@@ -34,7 +34,10 @@
 			<li><a href="{{ request.get_host }}/rules">Положение</a></li>
 			<li><a href="{{ request.get_host }}/contacts">Контакты</a></li>
 		</ul>
-		{% if user.is_authenticated %}<div id="auth_team">Здравствуйте {{user.username}}<a href="{{ request.get_host }}/logout" class="logout"></a></div>{% endif %}
+		{% if user.is_authenticated %}<div id="auth_team">Здравствуйте {{user.username}}<a href="{{ request.get_host }}/logout" class="logout"></a></div>
+		{% else %}
+			<div id ="auth_team"><li><a href="{{ request.get_host }}/login">Войти на сайт</a></li></div>
+		{% endif %}
 	</div>
 	
 	{% block text_info %}

@@ -23,4 +23,5 @@ urlpatterns = patterns('',
 	url(r'^contacts/$', 'itfest.main.views.view_contacts'),
 	url(r'^$', 'itfest.main.views.view_main'),
 	url(r'^logout/$','itfest.main.views.view_logout'),
+	url(r'^login/$', 'itfest.main.views.view_login'),
 )

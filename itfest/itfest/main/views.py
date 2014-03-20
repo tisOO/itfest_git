@@ -21,6 +21,7 @@ from django.utils import timezone
 
 from itfest.main.backend import activeTask, showHint, recalc_points, check_psw, check_answer
 from itfest.main.context_processors import itfest_proc
+from itfest.main.forms import LoginForm
 
 def context_proc(request):
 	teams = Team.objects.order_by('-points', 'last_task_time')
@@ -98,4 +99,18 @@ def view_main(request):
 def view_logout(request):
 	auth.logout(request)
 	return HttpResponseRedirect('/')
-	
+
+def view_login(request):
+	form = LoginForm()
+	if request.method == 'POST':
+		form = LoginForm(request.POST)
+	if form.is_valid():
+		cd = form.cleaned_data
+		user = auth.authenticate(username = cd['username'], password = cd['password'])
+		if user is not None and user.is_active:
+			auth.login(request, user)
+			return HttpResponseRedirect('/')
+		else:
+			return HttpResponseRedirect('/login/')
+	else:
+			return render(request, 'login.html', {'form':form})
